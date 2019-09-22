@@ -1,0 +1,30 @@
+.layout {
+    display: grid;
+    grid-template-columns: 10em auto;
+    grid-template-rows: 3em auto 3em;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background: #eee;
+}
+
+aside {
+    grid-area: sidebar;
+    border-right: 0.1em solid #eee;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+    background: #eee;
+}
+
