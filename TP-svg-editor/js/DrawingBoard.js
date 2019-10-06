@@ -69,6 +69,7 @@ export class DrawingBoard {
     }
 
     clean() {
+        SVGUtils.removeAllChildren(this.edition);
         SVGUtils.removeAllChildren(this.content);
     }
 }
