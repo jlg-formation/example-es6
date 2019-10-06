@@ -36,6 +36,7 @@ export class DrawingBoard {
         console.log('onClick', this, arguments);
         if (this.mode === MODE.WIDGET_SELECTED) {
             this.widget.depose(this, event);
+            this.setMode(MODE.DEFAULT);
         }
     }
 
