@@ -6,4 +6,10 @@ export class SVGUtils {
         const y = event.clientY - dim.top;
         return { x, y };
     }
+
+    static removeAllChildren(group) {
+        while (group.firstChild) {
+            group.removeChild(group.firstChild);
+        }
+    }
 } 
