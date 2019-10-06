@@ -1,8 +1,11 @@
+import { SVGUtils } from "../misc/svg-utils.js";
+
 export class Line {
     depose(board, event) {
         console.log('event: ', event);
-        const x1 = 10;
-        const y1 = 20;
+        const {x, y} = SVGUtils.getCoordinates(event);
+        const x1 = x;
+        const y1 = y;
         const x2 = x1 + 100;
         const y2 = y1 + 100;
 
