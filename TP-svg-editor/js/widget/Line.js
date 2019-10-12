@@ -27,8 +27,12 @@ export class Line {
     select() {
         // add move point to 2 extremities.
         this.board.removeAllEditionPoint();
-        this.board.addEditionPoint('start', this.x1, this.y1);
-        this.board.addEditionPoint('end', this.x2, this.y2);
+        this.board.addEditionPoint('start', this.x1, this.y1, () => {
+            console.log('edit start');
+        });
+        this.board.addEditionPoint('end', this.x2, this.y2, () => {
+            console.log('edit end');
+        });
     }
 
     unselect() {
