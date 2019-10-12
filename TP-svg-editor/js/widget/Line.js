@@ -4,6 +4,10 @@ export class Line {
 
     constructor(board) {
         this.board = board;
+        this.x1 = undefined;
+        this.y1 = undefined;
+        this.x2 = undefined;
+        this.y2 = undefined;
     }
 
     depose(event) {
@@ -21,6 +25,22 @@ export class Line {
         line.setAttribute('y2', this.y2);
         line.setAttribute('stroke', 'black');
         this.board.content.appendChild(line);
+
+        const selectableLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+        selectableLine.setAttribute('x1', this.x1);
+        selectableLine.setAttribute('x2', this.x2);
+        selectableLine.setAttribute('y1', this.y1);
+        selectableLine.setAttribute('y2', this.y2);
+        selectableLine.setAttribute('stroke', 'transparent');
+        selectableLine.setAttribute('stroke-width', '20');
+        selectableLine.setAttribute('fill', 'transparent');
+        selectableLine.addEventListener('click', event => {
+            event.stopPropagation();
+            console.log('move');
+        });
+        this.board.selectable.appendChild(selectableLine);
+
+
         this.select();
     }
 

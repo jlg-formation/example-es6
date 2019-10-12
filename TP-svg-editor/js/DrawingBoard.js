@@ -14,6 +14,7 @@ export class DrawingBoard {
         this.elt.innerHTML = '<svg></svg>';
         this.svg = this.elt.querySelector('svg');
         this.content = SVGUtils.addGroup(this.svg, 'content');
+        this.selectable = SVGUtils.addGroup(this.svg, 'selectable');
         this.edition = SVGUtils.addGroup(this.svg, 'edition');
         this.mode = MODE.DEFAULT;
         this.svg.addEventListener('click', this.onClick.bind(this));
