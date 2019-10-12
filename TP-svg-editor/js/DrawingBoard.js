@@ -3,7 +3,7 @@ import { EditionPoint } from "./EditionPoint.js";
 
 export const MODE = Object.freeze({
     DEFAULT: 'default',
-    WIDGET_SELECTED: 'widget-selected',
+    WIDGET_INSERT: 'widget-insert',
     WIDGET_EDITING: 'widget-editing'
 });
 
@@ -32,14 +32,14 @@ export class DrawingBoard {
 
     select(widget) {
         console.log('widget: ', widget);
-        this.setMode(MODE.WIDGET_SELECTED);
+        this.setMode(MODE.WIDGET_INSERT);
         console.log('this', this);
         this.selectedWidget = widget;
     }
 
     onClick(event) {
         console.log('onClick', this, arguments);
-        if (this.mode === MODE.WIDGET_SELECTED) {
+        if (this.mode === MODE.WIDGET_INSERT) {
             this.selectedWidget.depose(event);
             this.setMode(MODE.WIDGET_EDITING);
             return;
