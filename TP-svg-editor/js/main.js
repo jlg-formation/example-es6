@@ -8,7 +8,7 @@ const drawingBoard = new DrawingBoard('.board');
 
 window.addLine = function () {
     console.log('addLine', arguments, this);
-    drawingBoard.select(new Line(drawingBoard));
+    drawingBoard.prepareForInsert(new Line(drawingBoard));
 }
 document.querySelector('button.addLine').addEventListener('click', addLine);
 document.querySelector('button.clean').addEventListener('click', drawingBoard.clean.bind(drawingBoard));

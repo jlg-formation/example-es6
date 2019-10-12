@@ -18,7 +18,7 @@ export class DrawingBoard {
         this.edition = SVGUtils.addGroup(this.svg, 'edition');
         this.mode = MODE.DEFAULT;
         this.svg.addEventListener('click', this.onClick.bind(this));
-        this.selectedWidget = null;
+        this.widget = null;
     }
 
     setMode(mode) {
@@ -30,22 +30,29 @@ export class DrawingBoard {
         this.elt.classList.add(mode);
     }
 
-    select(widget) {
+    prepareForInsert(widget) {
         console.log('widget: ', widget);
         this.setMode(MODE.WIDGET_INSERT);
         console.log('this', this);
-        this.selectedWidget = widget;
+        this.widget = widget;
+    }
+
+    select(widget) {
+        this.setMode(MODE.WIDGET_EDITING);
+        this.widget = widget;
+        this.widget.select();
     }
 
     onClick(event) {
         console.log('onClick', this, arguments);
         if (this.mode === MODE.WIDGET_INSERT) {
-            this.selectedWidget.depose(event);
+            this.widget.depose(event);
             this.setMode(MODE.WIDGET_EDITING);
+            this.widget.select();
             return;
         }
         if (this.mode === MODE.WIDGET_EDITING) {
-            this.selectedWidget.unselect();
+            this.widget.unselect();
             this.setMode(MODE.DEFAULT);
             return;
         }

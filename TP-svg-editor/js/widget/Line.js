@@ -36,12 +36,10 @@ export class Line {
         selectableLine.setAttribute('fill', 'transparent');
         selectableLine.addEventListener('click', event => {
             event.stopPropagation();
-            console.log('move');
+            console.log('select');
+            this.board.select(this);
         });
         this.board.selectable.appendChild(selectableLine);
-
-
-        this.select();
     }
 
     select() {
