@@ -6,14 +6,18 @@ export const MODE = Object.freeze({
     WIDGET_EDITING: 'widget-editing'
 });
 
-function createEditionPoint(x, y) {
+function createEditionPoint(x, y, label) {
+    const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+    group.setAttribute('class', label);
+
     const circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     circle.setAttribute('r', 3);
     circle.setAttribute('cx', x);
     circle.setAttribute('cy', y);
     circle.setAttribute('fill', 'white');
     circle.setAttribute('stroke', 'black');
-    return circle;
+    group.appendChild(circle);
+    return group;
 }
 
 export class DrawingBoard {
@@ -24,10 +28,9 @@ export class DrawingBoard {
         this.svg = this.elt.querySelector('svg');
         this.content = this.svg.querySelector('.content');
         this.edition = this.svg.querySelector('.edition');
-        console.log('Drawing Board', this);
         this.mode = MODE.DEFAULT;
         this.svg.addEventListener('click', this.onClick.bind(this));
-        this.widget = null;
+        this.selectedWidget = null;
     }
 
     setMode(mode) {
@@ -43,14 +46,20 @@ export class DrawingBoard {
         console.log('widget: ', widget);
         this.setMode(MODE.WIDGET_SELECTED);
         console.log('this', this);
-        this.widget = widget;
+        this.selectedWidget = widget;
     }
 
     onClick(event) {
         console.log('onClick', this, arguments);
         if (this.mode === MODE.WIDGET_SELECTED) {
-            this.widget.depose(event);
+            this.selectedWidget.depose(event);
+            this.setMode(MODE.WIDGET_EDITING);
+            return;
+        }
+        if (this.mode === MODE.WIDGET_EDITING) {
+            this.selectedWidget.unselect();
             this.setMode(MODE.DEFAULT);
+            return;
         }
     }
 
@@ -58,18 +67,18 @@ export class DrawingBoard {
         this.content.appendChild(elt);
     }
 
-    setEditionMode() {
-        SVGUtils.removeAllChildren(this.edition);
-    }
-
     addEditionPoint(label, x, y) {
         console.log('add edition point');
-        const circle = createEditionPoint(x, y);
+        const circle = createEditionPoint(x, y, label);
         this.edition.appendChild(circle);
     }
 
     clean() {
         SVGUtils.removeAllChildren(this.edition);
         SVGUtils.removeAllChildren(this.content);
+    }
+
+    removeAllEditionPoint() {
+        SVGUtils.removeAllChildren(this.edition);
     }
 }

@@ -5,6 +5,7 @@ export class Line {
     constructor(board) {
         this.board = board;
     }
+
     depose(event) {
         console.log('event: ', event);
         const {x, y} = SVGUtils.getCoordinates(event);
@@ -25,8 +26,12 @@ export class Line {
 
     select() {
         // add move point to 2 extremities.
-        this.board.setEditionMode();
+        this.board.removeAllEditionPoint();
         this.board.addEditionPoint('start', this.x1, this.y1);
         this.board.addEditionPoint('end', this.x2, this.y2);
+    }
+
+    unselect() {
+        this.board.removeAllEditionPoint();
     }
 }
