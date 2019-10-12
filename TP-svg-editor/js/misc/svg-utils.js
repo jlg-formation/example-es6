@@ -12,4 +12,11 @@ export class SVGUtils {
             group.removeChild(group.firstChild);
         }
     }
+
+    static addGroup(parent, name) {
+        const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+        group.setAttribute('class', name);
+        parent.appendChild(group);
+        return group;
+    }
 } 

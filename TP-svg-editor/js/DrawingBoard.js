@@ -11,10 +11,10 @@ export class DrawingBoard {
     constructor(selector) {
         this.elt = document.querySelector(selector);
         this.elt.classList.add('drawing-board');
-        this.elt.innerHTML = '<svg><g class="content"><circle r="50" cx="100" cy="200"></g><g class="edition"></g></svg>';
+        this.elt.innerHTML = '<svg></svg>';
         this.svg = this.elt.querySelector('svg');
-        this.content = this.svg.querySelector('.content');
-        this.edition = this.svg.querySelector('.edition');
+        this.content = SVGUtils.addGroup(this.svg, 'content');
+        this.edition = SVGUtils.addGroup(this.svg, 'edition');
         this.mode = MODE.DEFAULT;
         this.svg.addEventListener('click', this.onClick.bind(this));
         this.selectedWidget = null;
