@@ -1,36 +1,11 @@
 import { SVGUtils } from "./misc/svg-utils.js";
+import { EditionPoint } from "./EditionPoint.js";
 
 export const MODE = Object.freeze({
     DEFAULT: 'default',
     WIDGET_SELECTED: 'widget-selected',
     WIDGET_EDITING: 'widget-editing'
 });
-
-function createEditionPoint(x, y, label, onclickFn) {
-    const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
-    group.setAttribute('class', label);
-
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    circle.setAttribute('r', 3);
-    circle.setAttribute('cx', x);
-    circle.setAttribute('cy', y);
-    circle.setAttribute('fill', 'white');
-    circle.setAttribute('stroke', 'black');
-    group.appendChild(circle);
-    const clickableArea = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-    clickableArea.setAttribute('r', 10);
-    clickableArea.setAttribute('cx', x);
-    clickableArea.setAttribute('cy', y);
-    clickableArea.setAttribute('fill', 'transparent');
-    clickableArea.setAttribute('stroke', 'transparent');
-    clickableArea.setAttribute('class', 'clickable');
-    clickableArea.addEventListener('click', event => {
-        event.stopPropagation();
-        onclickFn(event);
-    });
-    group.appendChild(clickableArea);
-    return group;
-}
 
 export class DrawingBoard {
     constructor(selector) {
@@ -81,7 +56,7 @@ export class DrawingBoard {
 
     addEditionPoint(label, x, y, onClickFn) {
         console.log('add edition point');
-        const circle = createEditionPoint(x, y, label, onClickFn);
+        const circle = (new EditionPoint(x, y, label, onClickFn)).getGroup();
         this.edition.appendChild(circle);
     }
 

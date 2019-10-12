@@ -12,3 +12,7 @@ a {
 footer a:hover {
     text-decoration: underline;
 }
+
+.clickable {
+    cursor: pointer;
+}
