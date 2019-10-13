@@ -1,6 +1,6 @@
 .layout {
     display: grid;
-    grid-template-columns: 10em auto;
+    grid-template-columns: 3em auto;
     grid-template-rows: 3em auto 3em;
     grid-template-areas:
         "header header"
@@ -16,6 +16,8 @@ header {
 
 aside {
     grid-area: sidebar;
+    display: flex;
+    flex-flow: column;
     border-right: 0.1em solid #eee;
 }
 

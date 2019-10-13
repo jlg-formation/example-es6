@@ -9,6 +9,12 @@ a {
     color: inherit;
 }
 
+button {
+    width: 3em;
+    height: 3em;
+    padding: 0.5em;
+}
+
 footer a:hover {
     text-decoration: underline;
 }

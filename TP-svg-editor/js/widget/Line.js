@@ -97,6 +97,9 @@ export class Line {
             this.elt.setAttribute('y1', this.y1);
             this.selectableElt.setAttribute('x1', this.x1);
             this.selectableElt.setAttribute('y1', this.y1);
+            const editionPointElt = this.board.getEditionPointElt(pointName);
+            editionPointElt.setAttribute('cx', this.x1);
+            editionPointElt.setAttribute('cy', this.y1);
         }
         if (pointName === 'end') {
             this.x2 = delta.x + orig.x2;
@@ -105,9 +108,10 @@ export class Line {
             this.elt.setAttribute('y2', this.y2);
             this.selectableElt.setAttribute('x2', this.x2);
             this.selectableElt.setAttribute('y2', this.y2);
+            const editionPointElt = this.board.getEditionPointElt(pointName);
+            editionPointElt.setAttribute('cx', this.x2);
+            editionPointElt.setAttribute('cy', this.y2);
         }
-        const editionPointElt = this.board.getEditionPointElt(pointName);
-        editionPointElt.setAttribute('cx', this.x1);
-        editionPointElt.setAttribute('cy', this.y1);
+
     }
 }

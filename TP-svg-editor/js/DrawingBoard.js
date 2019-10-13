@@ -4,7 +4,8 @@ import { EditionPoint } from "./EditionPoint.js";
 export const MODE = Object.freeze({
     DEFAULT: 'default',
     WIDGET_INSERT: 'widget-insert',
-    WIDGET_EDITING: 'widget-editing'
+    WIDGET_SELECTED: 'widget-selected',
+    WIDGET_EDITING: 'widget-editing',
 });
 
 export class DrawingBoard {
@@ -12,12 +13,12 @@ export class DrawingBoard {
     constructor(selector) {
         this.elt = document.querySelector(selector);
         this.elt.classList.add('drawing-board');
-        this.elt.innerHTML = '<svg></svg>';
+        this.elt.innerHTML = '<svg></svg><div class="mode"></div>';
         this.svg = this.elt.querySelector('svg');
         this.content = SVGUtils.addGroup(this.svg, 'content');
         this.selectable = SVGUtils.addGroup(this.svg, 'selectable');
         this.edition = SVGUtils.addGroup(this.svg, 'edition');
-        this.mode = MODE.DEFAULT;
+        this.setMode(MODE.DEFAULT);
         this.svg.addEventListener('click', this.onClick.bind(this));
         this.widget = null;
     }
@@ -29,6 +30,7 @@ export class DrawingBoard {
             this.elt.classList.remove(value);
         }
         this.elt.classList.add(mode);
+        this.elt.querySelector('.mode').innerHTML = this.mode;
     }
 
     prepareForInsert(widget) {
@@ -39,7 +41,7 @@ export class DrawingBoard {
     }
 
     select(widget) {
-        this.setMode(MODE.WIDGET_EDITING);
+        this.setMode(MODE.WIDGET_SELECTED);
         this.widget = widget;
         this.widget.select();
     }
@@ -48,13 +50,18 @@ export class DrawingBoard {
         console.log('onClick', this, arguments);
         if (this.mode === MODE.WIDGET_INSERT) {
             this.widget.depose(event);
-            this.setMode(MODE.WIDGET_EDITING);
+            this.setMode(MODE.WIDGET_SELECTED);
             this.widget.select();
             return;
         }
-        if (this.mode === MODE.WIDGET_EDITING) {
+        if (this.mode === MODE.WIDGET_SELECTED) {
+            console.log('going to default');
             this.widget.unselect();
             this.setMode(MODE.DEFAULT);
+            return;
+        }
+        if (this.mode === MODE.WIDGET_EDITING) {
+            this.setMode(MODE.WIDGET_SELECTED);
             return;
         }
     }
@@ -76,8 +83,9 @@ export class DrawingBoard {
     }
 
     clean() {
-        SVGUtils.removeAllChildren(this.edition);
         SVGUtils.removeAllChildren(this.content);
+        SVGUtils.removeAllChildren(this.selectable);
+        SVGUtils.removeAllChildren(this.edition);
     }
 
     removeAllEditionPoint() {

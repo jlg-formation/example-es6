@@ -1,3 +1,5 @@
+import { MODE } from "./DrawingBoard.js";
+
 export class WidgetEdit {
 
     constructor(widget, pointName) {
@@ -19,6 +21,7 @@ export class WidgetEdit {
 
             const mousemove = (event) => {
                 this.widget.edit(this.pointName, this.orig, { x: event.pageX - startX, y: event.pageY - startY });
+                this.widget.board.setMode(MODE.WIDGET_EDITING);
             }
 
             document.addEventListener('mousemove', mousemove);
