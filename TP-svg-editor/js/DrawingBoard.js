@@ -8,6 +8,7 @@ export const MODE = Object.freeze({
 });
 
 export class DrawingBoard {
+
     constructor(selector) {
         this.elt = document.querySelector(selector);
         this.elt.classList.add('drawing-board');
@@ -68,6 +69,12 @@ export class DrawingBoard {
         this.edition.appendChild(circle);
     }
 
+    getEditionPointElt(label) {
+        const result = this.edition.querySelector(`g.${label} circle`);
+        console.log('result: ', result);
+        return result;
+    }
+
     clean() {
         SVGUtils.removeAllChildren(this.edition);
         SVGUtils.removeAllChildren(this.content);
@@ -76,4 +83,13 @@ export class DrawingBoard {
     removeAllEditionPoint() {
         SVGUtils.removeAllChildren(this.edition);
     }
+
+    selectFromClickEvent(widget) {
+        return event => {
+            event.stopPropagation();
+            console.log('select');
+            this.select(widget);
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 export class EditionPoint {
-    constructor(x, y, label, onclickFn) {
+    constructor(x, y, label, onMouseDownFn) {
         this.group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
         this.group.setAttribute('class', label);
     
@@ -18,9 +18,9 @@ export class EditionPoint {
         clickableArea.setAttribute('fill', 'transparent');
         clickableArea.setAttribute('stroke', 'transparent');
         clickableArea.setAttribute('class', 'clickable');
-        clickableArea.addEventListener('click', event => {
+        clickableArea.addEventListener('mousedown', event => {
             event.stopPropagation();
-            onclickFn(event);
+            onMouseDownFn(event);
         });
         this.group.appendChild(clickableArea);
         
