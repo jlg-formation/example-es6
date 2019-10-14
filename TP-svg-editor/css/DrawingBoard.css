@@ -9,14 +9,14 @@
     flex-grow: 1;
 }
 
-.widget-insert {
+.drawing-board .widget-insert {
     cursor: crosshair;
 }
 
-.clickable {
+.drawing-board .clickable {
     cursor: pointer;
 }
 
-.selectable {
+.drawing-board .selectable {
     cursor: move;
 }
