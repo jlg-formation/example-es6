@@ -12,36 +12,54 @@ export class DrawingBoard {
 
   constructor(selector) {
     this.elt = document.querySelector(selector);
+
+    // we add drawing-board class in order to let the DrawingBoard.css file to be applied.
     this.elt.classList.add('drawing-board');
+
+    // initializing to SVG and mode DIV.
     this.elt.innerHTML = '<svg></svg><div class="mode"></div>';
     this.svg = this.elt.querySelector('svg');
-    this.content = SVGUtils.addGroup(this.svg, 'content');
-    this.selectable = SVGUtils.addGroup(this.svg, 'selectable');
-    this.edition = SVGUtils.addGroup(this.svg, 'edition');
-    this.setMode(MODE.DEFAULT);
+
+    // adding 3 groups for the editor :
+    this.content = SVGUtils.addGroup(this.svg, 'content'); // where the real SVG stuff are
+    this.selectable = SVGUtils.addGroup(this.svg, 'selectable'); // the selection areas
+    this.edition = SVGUtils.addGroup(this.svg, 'edition'); // where the edition points will be
+
+
+    this._mode = MODE.DEFAULT;
     this.svg.addEventListener('click', this.onClick.bind(this));
     this.widget = null;
   }
 
-  setMode(mode) {
-    this.mode = mode;
+
+  /**
+   * val must be a MODE.xxx constant
+   *
+   * @memberof DrawingBoard
+   */
+  set mode(val) {
+    this._mode = val;
     for (const value of Object.values(MODE)) {
       console.log('value: ', value);
       this.elt.classList.remove(value);
     }
-    this.elt.classList.add(mode);
-    this.elt.querySelector('.mode').innerHTML = this.mode;
+    this.elt.classList.add(val);
+    this.elt.querySelector('.mode').innerHTML = this._mode;
+  }
+
+  get mode() {
+    return this._mode;
   }
 
   prepareForInsert(widget) {
     console.log('widget: ', widget);
-    this.setMode(MODE.WIDGET_INSERT);
+    this.mode = MODE.WIDGET_INSERT;
     console.log('this', this);
     this.widget = widget;
   }
 
   select(widget) {
-    this.setMode(MODE.WIDGET_SELECTED);
+    this.mode = MODE.WIDGET_SELECTED;
     this.widget = widget;
     this.widget.select();
   }
@@ -50,18 +68,18 @@ export class DrawingBoard {
     console.log('onClick', this, arguments);
     if (this.mode === MODE.WIDGET_INSERT) {
       this.widget.depose(event);
-      this.setMode(MODE.WIDGET_SELECTED);
+      this.mode = MODE.WIDGET_SELECTED;
       this.widget.select();
       return;
     }
     if (this.mode === MODE.WIDGET_SELECTED) {
       console.log('going to default');
       this.widget.unselect();
-      this.setMode(MODE.DEFAULT);
+      this.mode = MODE.DEFAULT;
       return;
     }
     if (this.mode === MODE.WIDGET_EDITING) {
-      this.setMode(MODE.WIDGET_SELECTED);
+      this.mode = MODE.WIDGET_SELECTED;
       return;
     }
   }
