@@ -8,6 +8,13 @@ export const MODE = Object.freeze({
   WIDGET_EDITING: 'widget-editing',
 });
 
+const printMode = (prefix, mode) => {
+  console.log('prefix: ', prefix);
+  console.log('mode: ', mode);
+
+  return prefix[0] + mode.toUpperCase();
+};
+
 const nothingImplemented = () => console.log('nothing implemented');
 
 export class DrawingBoard {
@@ -28,7 +35,7 @@ export class DrawingBoard {
     this.edition = SVGUtils.addGroup(this.svg, 'edition'); // where the edition points will be
 
 
-    this._mode = MODE.DEFAULT;
+    this.mode = MODE.DEFAULT;
     this.svg.addEventListener('click', this.onClick.bind(this));
     this.widget = null;
   }
@@ -46,7 +53,7 @@ export class DrawingBoard {
       this.elt.classList.remove(value);
     }
     this.elt.classList.add(val);
-    this.elt.querySelector('.mode').innerHTML = this._mode;
+    this.elt.querySelector('.mode').innerHTML = printMode`Actual Mode is ${this._mode}`;
   }
 
   get mode() {
