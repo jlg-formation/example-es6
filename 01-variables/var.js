@@ -1,6 +1,6 @@
-console.log('a', a);
-var a = 3;
-console.log('a', a);
+console.log('v', v);
+var v = 3;
+console.log('v', v);
 
 console.log(hello('Jean-Louis'));
 
