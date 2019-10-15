@@ -8,6 +8,8 @@ export const MODE = Object.freeze({
   WIDGET_EDITING: 'widget-editing',
 });
 
+const nothingImplemented = () => console.log('nothing implemented');
+
 export class DrawingBoard {
 
   constructor(selector) {
@@ -88,7 +90,7 @@ export class DrawingBoard {
     this.content.appendChild(elt);
   }
 
-  addEditionPoint(label, x, y, onClickFn) {
+  addEditionPoint(label, x, y, onClickFn = nothingImplemented) {
     console.log('add edition point');
     const circle = (new EditionPoint(x, y, label, onClickFn)).getGroup();
     this.edition.appendChild(circle);
