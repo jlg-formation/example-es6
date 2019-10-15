@@ -19,15 +19,13 @@ export class WidgetEdit {
       const startX = event.pageX;
       const startY = event.pageY;
 
-      const mousemove = (event) => {
+      const mousemove = event => {
         this.widget.edit(this.pointName, this.orig, { x: event.pageX - startX, y: event.pageY - startY });
         this.widget.board.mode = MODE.WIDGET_EDITING;
       }
 
       document.addEventListener('mousemove', mousemove);
       document.addEventListener('mouseup', mouseup);
-
-
 
       function mouseup() {
         document.removeEventListener('mousemove', mousemove);
