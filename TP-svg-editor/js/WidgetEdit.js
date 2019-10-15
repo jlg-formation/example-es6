@@ -10,7 +10,7 @@ export class WidgetEdit {
   }
 
   getEditCallback() {
-    return (event) => {
+    return event => {
       console.log('mousedown', this.widget.getType());
       event.preventDefault();
       event.stopPropagation();
