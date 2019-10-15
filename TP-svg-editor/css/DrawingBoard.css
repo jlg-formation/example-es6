@@ -9,7 +9,7 @@
     flex-grow: 1;
 }
 
-.drawing-board .widget-insert {
+.drawing-board.widget-insert {
     cursor: crosshair;
 }
 
