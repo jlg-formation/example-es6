@@ -8,11 +8,8 @@ export const MODE = Object.freeze({
   WIDGET_EDITING: 'widget-editing',
 });
 
-const printMode = (prefix, mode) => {
-  console.log('prefix: ', prefix);
-  console.log('mode: ', mode);
-
-  return prefix[0] + mode.toUpperCase();
+const printMode = (strings, mode) => {
+  return strings[0] + mode.toUpperCase();
 };
 
 const nothingImplemented = () => console.log('nothing implemented');
