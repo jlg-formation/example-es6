@@ -12,6 +12,7 @@ console.log(a);
 console.log(b);
 console.log(c);
 
+// custom template
 function pluralize(strings, ...expressionArray) {
   const array = [strings[0]];
   for (let i = 1; i < strings.length; i++) {
