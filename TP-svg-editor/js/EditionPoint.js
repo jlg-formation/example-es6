@@ -25,10 +25,5 @@ export class EditionPoint {
       onMouseDownFn(event);
     });
     this.group.appendChild(clickableArea);
-
-  }
-
-  getGroup() {
-    return this.group;
   }
 }

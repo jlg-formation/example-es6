@@ -89,8 +89,8 @@ export class DrawingBoard {
   }
 
   addEditionPoint(label, x, y, onClickFn = nothingImplemented) {
-    const circle = (new EditionPoint(x, y, label, onClickFn)).getGroup();
-    this.edition.appendChild(circle);
+    const group = (new EditionPoint(x, y, label, onClickFn)).group;
+    this.edition.appendChild(group);
   }
 
   getEditionPointElt(label) {
