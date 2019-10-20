@@ -46,10 +46,7 @@ export class DrawingBoard {
    */
   set mode(val) {
     this._mode = val;
-    for (const value of Object.values(MODE)) {
-      console.log('value: ', value);
-      this.elt.classList.remove(value);
-    }
+    Object.values(MODE).forEach(v => this.elt.classList.remove(v));
     this.elt.classList.add(val);
     this.elt.querySelector('.mode').innerHTML = printMode`Actual Mode is ${this._mode}`;
   }
@@ -59,9 +56,7 @@ export class DrawingBoard {
   }
 
   prepareForInsert(widget) {
-    console.log('widget: ', widget);
     this.mode = MODE.WIDGET_INSERT;
-    console.log('this', this);
     this.widget = widget;
   }
 
@@ -72,7 +67,6 @@ export class DrawingBoard {
   }
 
   onClick(event) {
-    console.log('onClick', this, arguments);
     if (this.mode === MODE.WIDGET_INSERT) {
       this.widget.depose(event);
       this.mode = MODE.WIDGET_SELECTED;
@@ -80,7 +74,6 @@ export class DrawingBoard {
       return;
     }
     if (this.mode === MODE.WIDGET_SELECTED) {
-      console.log('going to default');
       this.widget.unselect();
       this.mode = MODE.DEFAULT;
       return;
@@ -96,15 +89,12 @@ export class DrawingBoard {
   }
 
   addEditionPoint(label, x, y, onClickFn = nothingImplemented) {
-    console.log('add edition point');
     const circle = (new EditionPoint(x, y, label, onClickFn)).getGroup();
     this.edition.appendChild(circle);
   }
 
   getEditionPointElt(label) {
-    const result = this.edition.querySelector(`g.${label} circle`);
-    console.log('result: ', result);
-    return result;
+    return this.edition.querySelector(`g.${label} circle`);
   }
 
   clean() {
