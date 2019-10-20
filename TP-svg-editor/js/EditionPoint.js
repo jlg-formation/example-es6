@@ -1,7 +1,8 @@
 import { SVGNS } from "./misc/svg-utils.js"
 
 export class EditionPoint {
-  constructor(x, y, label, onMouseDownFn) {
+  // use of parameter context matching
+  constructor(x, y, { label = 'tobedefined', onMouseDownFn = evt => { } }) {
     this.group = document.createElementNS(SVGNS, 'g');
     this.group.setAttribute('class', label);
 

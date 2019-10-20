@@ -89,7 +89,7 @@ export class DrawingBoard {
   }
 
   addEditionPoint(label, x, y, onClickFn = nothingImplemented) {
-    const group = (new EditionPoint(x, y, label, onClickFn)).group;
+    const group = (new EditionPoint(x, y, { label, onMouseDownFn: onClickFn })).group;
     this.edition.appendChild(group);
   }
 
