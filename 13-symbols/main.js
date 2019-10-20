@@ -26,5 +26,6 @@ console.log('keys : ', Object.keys(a));
 console.log('values : ', Object.values(a));
 console.log('entries : ', Object.entries(a));
 console.log('symbol keys : ', Object.getOwnPropertySymbols(a));
+console.log('all keys : ', Reflect.ownKeys(a));
 
 console.log('%O', Symbol);
