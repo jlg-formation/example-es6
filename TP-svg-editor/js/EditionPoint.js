@@ -1,9 +1,11 @@
+import { SVGNS } from "./misc/svg-utils.js"
+
 export class EditionPoint {
   constructor(x, y, label, onMouseDownFn) {
-    this.group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+    this.group = document.createElementNS(SVGNS, 'g');
     this.group.setAttribute('class', label);
 
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    const circle = document.createElementNS(SVGNS, 'circle');
     circle.setAttribute('r', 3);
     circle.setAttribute('cx', x);
     circle.setAttribute('cy', y);
@@ -11,7 +13,7 @@ export class EditionPoint {
     circle.setAttribute('stroke', 'black');
     this.group.appendChild(circle);
 
-    const clickableArea = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    const clickableArea = document.createElementNS(SVGNS, 'circle');
     clickableArea.setAttribute('r', 10);
     clickableArea.setAttribute('cx', x);
     clickableArea.setAttribute('cy', y);
