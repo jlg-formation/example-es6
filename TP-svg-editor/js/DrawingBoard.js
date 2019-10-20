@@ -110,7 +110,6 @@ export class DrawingBoard {
   selectFromClickEvent(widget) {
     return event => {
       event.stopPropagation();
-      console.log('select');
       this.select(widget);
     }
   }
