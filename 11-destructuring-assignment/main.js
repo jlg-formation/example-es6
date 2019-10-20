@@ -13,5 +13,5 @@ function getRandomPoint() {
   return { x: Math.random(), y: Math.random() };
 }
 
-const { x, y } = getRandomPoint();
-console.log('point', x, y);
+const { x, y, z = 1 } = getRandomPoint();
+console.log('point', x, y, z);
