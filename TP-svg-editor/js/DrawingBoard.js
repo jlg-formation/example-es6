@@ -2,10 +2,17 @@ import { SVGUtils } from "./misc/svg-utils.js";
 import { EditionPoint } from "./EditionPoint.js";
 
 export const MODE = Object.freeze({
-  DEFAULT: 'default',
-  WIDGET_INSERT: 'widget-insert',
-  WIDGET_SELECTED: 'widget-selected',
-  WIDGET_EDITING: 'widget-editing',
+  DEFAULT: 'mode-default',
+  WIDGET_INSERT: 'mode-widget-insert',
+  WIDGET_SELECTED: 'mode-widget-selected',
+  WIDGET_EDITING: 'mode-widget-editing',
+
+  // to transform mode into a generator itself.
+  *[Symbol.iterator]() {
+    for (const v of Object.values(this)) {
+      yield v;
+    }
+  }
 });
 
 // custom template
@@ -46,7 +53,9 @@ export class DrawingBoard {
    */
   set mode(val) {
     this._mode = val;
-    Object.values(MODE).forEach(v => this.elt.classList.remove(v));
+    for (const v of MODE) {
+      this.elt.classList.remove(v);
+    }
     this.elt.classList.add(val);
     this.elt.querySelector('.mode').innerHTML = printMode`Actual Mode is ${this._mode}`;
   }

@@ -1,17 +1,23 @@
 'use strict';
 
-// array matching
-const list = [1, 2, 3];
-let [a, , b] = list;
-console.log('a', a);
-console.log('b', b);
-[a, b] = [b, a];
-console.log('a', a);
-console.log('b', b);
-
-function getRandomPoint() {
-  return { x: Math.random(), y: Math.random() };
+function* hello() {
+  yield 123;
+  yield 'hello';
+  yield { message: 'coucou' };
 }
 
-const { x, y, z = 1 } = getRandomPoint();
-console.log('point', x, y, z);
+const gen = hello();
+console.log('gen: ', gen);
+let generatorObject = gen.next();
+console.log('generatorObject: ', generatorObject);
+generatorObject = gen.next();
+console.log('generatorObject: ', generatorObject);
+generatorObject = gen.next();
+console.log('generatorObject: ', generatorObject);
+generatorObject = gen.next();
+console.log('generatorObject: ', generatorObject);
+
+const gen2 = hello();
+for (const value of gen2) {
+  console.log('value: ', value);
+}
