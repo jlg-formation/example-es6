@@ -1,4 +1,4 @@
-import { SVGUtils } from "../misc/svg-utils.js";
+import { SVGNS, SVGUtils } from "../misc/svg-utils.js";
 import { WidgetMove } from "../WidgetMove.js";
 import { WidgetEdit } from "../WidgetEdit.js";
 
@@ -7,6 +7,7 @@ export class Line {
   constructor(board) {
     this.board = board;
 
+    // list attributes (optional but recommanded for clarity)
     this.x1 = undefined;
     this.y1 = undefined;
     this.x2 = undefined;
@@ -24,7 +25,7 @@ export class Line {
     this.x2 = this.x1 + 100;
     this.y2 = this.y1 + 100;
 
-    const line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+    const line = document.createElementNS(SVGNS, 'line');
     line.setAttribute('x1', this.x1);
     line.setAttribute('x2', this.x2);
     line.setAttribute('y1', this.y1);
@@ -33,7 +34,7 @@ export class Line {
     this.board.content.appendChild(line);
     this.elt = line;
 
-    const selectableLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+    const selectableLine = document.createElementNS(SVGNS, 'line');
     selectableLine.setAttribute('x1', this.x1);
     selectableLine.setAttribute('x2', this.x2);
     selectableLine.setAttribute('y1', this.y1);

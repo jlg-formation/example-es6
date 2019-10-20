@@ -1,3 +1,5 @@
+export const SVGNS = "http://www.w3.org/2000/svg";
+
 export class SVGUtils {
   static getCoordinates(event) {
     const e = event.target;
@@ -14,7 +16,7 @@ export class SVGUtils {
   }
 
   static addGroup(parent, name) {
-    const group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+    const group = document.createElementNS(SVGNS, 'g');
     group.setAttribute('class', name);
     parent.appendChild(group);
     return group;
