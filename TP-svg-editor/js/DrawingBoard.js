@@ -8,6 +8,7 @@ export const MODE = Object.freeze({
   WIDGET_EDITING: 'widget-editing',
 });
 
+// custom template
 const printMode = (strings, mode) => {
   return strings[0] + mode.toUpperCase();
 };
