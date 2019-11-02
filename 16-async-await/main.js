@@ -1,5 +1,7 @@
 'use strict';
 
+// ES8 = ES2017
+
 const sleep = time => new Promise((resolve, reject) => {
   if (time <= 2000) {
     setTimeout(resolve, time);
