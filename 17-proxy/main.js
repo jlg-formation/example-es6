@@ -21,7 +21,7 @@ let proxy = new Proxy(target, {
     // mandatory: return true for success.
     return true;
   }
-})
+});
 
 try {
   console.log('target', target);
@@ -51,6 +51,12 @@ try {
   console.log('about to push in proxy a string');
   proxy.push('tata');
   console.log('proxy', proxy);
+} catch (err) {
+  console.log('err: ', err);
+}
+
+try {
+  console.log('proxy[4]', proxy[4]);
 } catch (err) {
   console.log('err: ', err);
 }
