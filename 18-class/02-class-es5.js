@@ -18,7 +18,7 @@ Person.prototype.talk = function (sentence) {
   console.log(this.name + " says: " + sentence);
 };
 
-// when Person is intantiated, its prototype is Person.prototype
+// when Person is instantiated, its prototype is Person.prototype
 const alice = new Person("Alice", 14);
 console.log("alice: ", alice);
 alice.talk("Hello!");
